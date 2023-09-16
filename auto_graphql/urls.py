@@ -1,6 +1,6 @@
-from django.conf.urls import url
+from django.urls import re_path
 from .views import FlyingGraphQLView
 
 urlpatterns = [
-    url(r"graphql", FlyingGraphQLView.as_view(graphiql=True)),
+    re_path(r"graphql", FlyingGraphQLView.as_view(graphiql=True)),
 ]

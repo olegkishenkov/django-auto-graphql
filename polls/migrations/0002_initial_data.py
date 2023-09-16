@@ -2,6 +2,28 @@
 
 from django.db import migrations
 
+POLLS = [
+    {
+        "id": 1,
+        "name": "Leisure Poll?",
+    },
+    {
+        "id": 2,
+        "name": "Business Poll",
+    },
+]
+
+BUCKETS = [
+    {
+        "id": 1,
+        "name": "Tin Bucket",
+    },
+    {
+        "id": 2,
+        "name": "Silicon Bucket",
+    },
+]
+
 QUESTIONS = [
     {
         "id": 1,
@@ -18,6 +40,16 @@ QUESTIONS = [
         "question_text": "How are you?",
         "pub_date": "1970-01-01T00:00:00Z"
     }
+]
+
+QUESTIONS_POLLS = [
+    [1, 1],
+    [1, 2],
+    [2, 1],
+]
+
+QUESTIONS_BUCKETS = [
+    [1, 1],
 ]
 
 CHOICES = [
@@ -56,11 +88,27 @@ CHOICES = [
 
 def _populate_db(apps, schema_editor):
     db_alias = schema_editor.connection.alias
+    Poll = apps.get_model('polls', 'Poll')
     Question = apps.get_model('polls', 'Question')
     Choice = apps.get_model('polls', 'Choice')
+    Bucket = apps.get_model('polls', 'Bucket')
+
+    for poll in POLLS:
+        Poll.objects.using(db_alias).create(**poll)
+
+    for bucket in BUCKETS:
+        Bucket.objects.using(db_alias).create(**bucket)
 
     for question in QUESTIONS:
         Question.objects.using(db_alias).create(**question)
+
+    for question_poll in QUESTIONS_POLLS:
+        poll = Poll.objects.using(db_alias).get(id=question_poll[1])
+        Question.objects.using(db_alias).get(id=question_poll[0]).polls.add(poll)
+
+    for question_bucket in QUESTIONS_BUCKETS:
+        bucket = Bucket.objects.using(db_alias).get(id=question_bucket[1])
+        Question.objects.using(db_alias).get(id=question_bucket[0]).buckets.add(bucket)
 
     for choice in CHOICES:
         Choice.objects.using(db_alias).create(**choice)
@@ -68,8 +116,16 @@ def _populate_db(apps, schema_editor):
 
 def _backward(apps, schema_editor):
     db_alias = schema_editor.connection.alias
+    Polls = apps.get_model('polls', 'Poll')
     Question = apps.get_model('polls', 'Question')
     Choice = apps.get_model('polls', 'Choice')
+    Bucket = apps.get_model('polls', 'Bucket')
+
+    for poll in POLLS:
+        Polls.objects.using(db_alias).filter(id=poll['id']).delete()
+
+    for bucket in BUCKETS:
+        Bucket.objects.using(db_alias).filter(id=bucket['id']).delete()
 
     for question in QUESTIONS:
         Question.objects.using(db_alias).filter(id=question['id']).delete()
