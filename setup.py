@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django-auto-graphql", # Replace with your own username
-    version="0.0.1",
+    version="0.0.5",
     author="olegkishenkov",
     author_email="oleg.kishenkov@gmail.com",
     description="an automatic GraphQL API for all the models in a Django project",

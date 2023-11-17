@@ -1,0 +1,17 @@
+[project]
+name = "django-auto-graphql"
+version = "0.0.5"
+description = "an automatic GraphQL API for all the models in a Django project"
+authors = [
+  { name="Oleg Kishenkov", email="oleg.kishenkov@gmail.com" },
+]
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/olegkishenkov/django-auto-graphql"
