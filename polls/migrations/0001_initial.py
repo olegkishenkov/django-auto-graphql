@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Bucket',
+            name='Tag',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=200)),
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('question_text', models.CharField(max_length=200)),
                 ('pub_date', models.DateTimeField(verbose_name='date published')),
                 ('polls', models.ManyToManyField(to='polls.poll')),
-                ('buckets', models.ManyToManyField(to='polls.bucket')),
+                ('tags', models.ManyToManyField(to='polls.tag')),
             ],
         ),
         migrations.CreateModel(
