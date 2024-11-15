@@ -53,7 +53,6 @@ class FlyingGraphQLView(GraphQLView):
         models = django.apps.apps.get_models()
         query_attrs = {}
         for model in models:
-            print(model._meta.model_name)
             fields = model._meta.fields + model._meta.many_to_many
             meta_class = type('Meta', (), {
                 'model': model,
