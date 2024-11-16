@@ -1,6 +1,6 @@
 [project]
 name = "django-auto-graphql"
-version = "0.0.6"
+version = "0.1.0"
 description = "an automatic GraphQL API for all the models in a Django project"
 authors = [
   { name="Oleg Kishenkov", email="oleg.kishenkov@gmail.com" },
